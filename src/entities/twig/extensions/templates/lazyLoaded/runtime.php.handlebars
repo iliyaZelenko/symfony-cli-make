@@ -1,0 +1,28 @@
+<?php
+
+namespace {{ namespace }};
+
+use Twig\Extension\RuntimeExtensionInterface;
+
+class {{ runtimeClassName }} implements RuntimeExtensionInterface
+{
+    public function __construct()
+    {
+        // this simple example doesn't define any dependency, but in your own
+        // extensions, you'll need to inject services using this constructor
+    }
+    {{#if filterName}}
+
+    public function {{ filterMethod }}($argument)
+    {
+        // filter logic
+    }
+    {{/if}}
+    {{#if functionName}}
+
+    public function {{ functionMethod }}($argument)
+    {
+        // function logic
+    }
+    {{/if}}
+}

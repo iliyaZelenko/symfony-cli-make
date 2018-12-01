@@ -1,0 +1,34 @@
+{
+  "defaultSeverity": "warning",
+  "extends": ["tslint:latest", "tslint-config-standard", "tslint-config-prettier"],
+  "linterOptions": {
+    "include": [
+      "./src/**/*.ts"
+    ],
+    "exclude": [
+      "**/*.spec.js",
+      "./node_modules/**/*"
+    ]
+  },
+  "rules": {
+    // в node можно использовать консоль
+    "no-console": false,
+
+    /* Ilya Zelen tastes */
+    "interface-name" : [true, "never-prefix"],
+    "prefer-const": true,
+    "ordered-imports": [false],
+    "object-literal-sort-keys": [false],
+    "no-implicit-dependencies": [true, ["~", "@"]],
+    "no-submodule-imports": [true, "~", "@"],
+    "quotemark": [true, "single"],
+    "semicolon": [true, "never"],
+    "trailing-comma": [true, {
+      "multiline": "never",
+      "singleline": "never"
+    }],
+    "space-before-function-paren": true,
+
+    "restrict-plus-operands": false
+  }
+}

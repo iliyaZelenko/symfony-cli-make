@@ -1,0 +1,48 @@
+<?php
+
+namespace {{ namespace }};
+
+use Twig\Extension\AbstractExtension;
+{{#if filterName}}
+use Twig\TwigFilter;
+{{/if}}
+{{#if functionName}}
+use Twig\TwigFunction;
+{{/if}}
+
+class {{ className }} extends AbstractExtension
+{
+    {{#if filterName}}
+    public function getFilters()
+    {
+        // If your filter generates SAFE HTML, you should add a third parameter: ['is_safe' => ['html']]
+        // Reference: https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
+        return [
+            new TwigFilter('{{ filterName }}', [$this, '{{ filterMethod }}']),
+        ];
+    }
+
+    {{/if}}
+    {{#if functionName}}
+    public function getFunctions()
+    {
+        return [
+            new TwigFunction('{{ functionName }}', [$this, '{{ functionMethod }}']),
+        ];
+    }
+
+    {{/if}}
+    {{#if filterName}}
+    public function {{ filterMethod }}($argument)
+    {
+        // filter logic
+    }
+
+    {{/if}}
+    {{#if functionName}}
+    public function {{ functionMethod }}($argument)
+    {
+        // function logic
+    }
+    {{/if}}
+}
