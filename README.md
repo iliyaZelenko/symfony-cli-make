@@ -13,3 +13,5 @@ npx twig-ext
 ```
 
 Написан на TypeScript и Node.js.
+
+![](https://i.imgur.com/GbHDQnv.png)
