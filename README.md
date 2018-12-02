@@ -1,16 +1,38 @@
 Пакет для создания Twig расширений.
 
-Установка:
+## yarn
+
+#### Установка
 
 ```bash
-npm i symfony-cli-make
+yarn add symfony-cli-make
 ```
 
-Использование:
+#### Использование
 
 ```bash
-npx twig-ext
+yarn twig-ext
 ```
+
+## npm
+
+#### Установка
+
+```bash
+npm i --save symfony-cli-make
+```
+
+#### Использование:
+
+`npx` почему-то запускает немного криво на Windows.
+
+```bash
+npx twig-ext 
+# or 
+node ./node_modules/symfony-cli-make
+```
+
+---
 
 Написан на TypeScript и Node.js.
 

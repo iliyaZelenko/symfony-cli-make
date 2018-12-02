@@ -93,7 +93,7 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const App_ts_1 = __webpack_require__(1);
-const TwigExtensionStrategy_1 = __webpack_require__(7);
+const TwigExtensionStrategy_1 = __webpack_require__(4);
 new App_ts_1.default(new TwigExtensionStrategy_1.default()).execute();
 
 
@@ -106,14 +106,12 @@ new App_ts_1.default(new TwigExtensionStrategy_1.default()).execute();
 Object.defineProperty(exports, "__esModule", { value: true });
 const chalk_1 = __webpack_require__(2);
 const figlet = __webpack_require__(3);
-const helpers_1 = __webpack_require__(4);
 class App {
     constructor(entity) {
         this.entity = entity;
     }
     execute() {
         drawLogo();
-        console.log(chalk_1.default.gray(`\nYour project src folder: ${helpers_1.getSrcDir()}\n`));
         this.entity.execute();
     }
 }
@@ -147,85 +145,12 @@ module.exports = require("figlet");
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __webpack_require__(5);
-const fs = __webpack_require__(6);
-/**
- * Конвертирует путь в namespace
- *
- * @param {string} path
- * @param {string} prefix
- * @return {string}
- */
-function covertPathToNamespace(path, prefix = 'App\\') {
-    const separator = path.includes('/') ? '\\/' : '\\\\';
-    const re = new RegExp(separator, 'gi');
-    return prefix + path.replace(re, '\\');
-}
-exports.covertPathToNamespace = covertPathToNamespace;
-/**
- * Конвертирует введенный путь в понятный для Node.js формат.
- *
- * @param {string} path
- * @return {string} joined path by OC separator
- */
-function covertInputPath(path) {
-    // const separator: string = path.includes('/') ? '/' : '\\'
-    // const separatedPath: string[] = path.split(separator)
-    // оказывается есть такая удобная ф-я
-    return path_1.normalize(path); // join(...separatedPath)
-}
-exports.covertInputPath = covertInputPath;
-/**
- * Возвращает путь к папке src.
- * Рекурсивно поднимается по директория вверх.
- *
- * @param {string} srcFolder name of src folder
- * @param {string} startPath
- * @return {string} "src" folder path
- */
-function getSrcDir(srcFolder = 'src', startPath = __dirname) {
-    const parentPath = path_1.normalize(startPath + '/..');
-    if (startPath === parentPath) {
-        throw Error('Could not find folder.');
-    }
-    // если папка этого путя совпадает с srcFolder
-    if (path_1.basename(startPath) === srcFolder) {
-        return startPath;
-    }
-    // если этот путь содержит srcFolder (для оптимизации можно написать еще проверку для parentPath в отдельном if)
-    if (fs.pathExistsSync(path_1.join(startPath, srcFolder))) {
-        return path_1.join(startPath, srcFolder);
-    }
-    return getSrcDir(srcFolder, parentPath);
-}
-exports.getSrcDir = getSrcDir;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("path");
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-module.exports = require("fs-extra");
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const inquirer = __webpack_require__(8);
+const inquirer = __webpack_require__(5);
 const chalk_1 = __webpack_require__(2);
-const path_1 = __webpack_require__(5);
-const AbstractEntityStrategy_1 = __webpack_require__(9);
+const path_1 = __webpack_require__(6);
+const AbstractEntityStrategy_1 = __webpack_require__(7);
 const questions_1 = __webpack_require__(11);
-const helpers_1 = __webpack_require__(4);
+const helpers_1 = __webpack_require__(10);
 // pattern Strategy
 class TwigExtensionStrategy extends AbstractEntityStrategy_1.default {
     constructor() {
@@ -316,22 +241,28 @@ exports.default = TwigExtensionStrategy;
 
 
 /***/ }),
-/* 8 */
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports = require("inquirer");
 
 /***/ }),
-/* 9 */
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const handlebars_1 = __webpack_require__(10);
-const fs = __webpack_require__(6);
-const path_1 = __webpack_require__(5);
-const helpers_1 = __webpack_require__(4);
+const handlebars_1 = __webpack_require__(8);
+const fs = __webpack_require__(9);
+const path_1 = __webpack_require__(6);
+const helpers_1 = __webpack_require__(10);
 class AbstractEntityStrategy {
     compileTemplate(source, context) {
         const template = handlebars_1.default.compile(source);
@@ -356,10 +287,77 @@ exports.default = AbstractEntityStrategy;
 
 
 /***/ }),
-/* 10 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = require("handlebars");
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports = require("fs-extra");
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const path_1 = __webpack_require__(6);
+const fs = __webpack_require__(9);
+/**
+ * Конвертирует путь в namespace
+ *
+ * @param {string} path
+ * @param {string} prefix
+ * @return {string}
+ */
+function covertPathToNamespace(path, prefix = 'App\\') {
+    const separator = path.includes('/') ? '\\/' : '\\\\';
+    const re = new RegExp(separator, 'gi');
+    return prefix + path.replace(re, '\\');
+}
+exports.covertPathToNamespace = covertPathToNamespace;
+/**
+ * Конвертирует введенный путь в понятный для Node.js формат.
+ *
+ * @param {string} path
+ * @return {string} joined path by OC separator
+ */
+function covertInputPath(path) {
+    // const separator: string = path.includes('/') ? '/' : '\\'
+    // const separatedPath: string[] = path.split(separator)
+    // оказывается есть такая удобная ф-я
+    return path_1.normalize(path); // join(...separatedPath)
+}
+exports.covertInputPath = covertInputPath;
+/**
+ * Возвращает путь к папке src.
+ * Рекурсивно поднимается по директория вверх.
+ *
+ * @param {string} srcFolder name of src folder
+ * @param {string} startPath
+ * @return {string} "src" folder path
+ */
+function getSrcDir(srcFolder = 'src', startPath = __dirname) {
+    const parentPath = path_1.normalize(startPath + '/..');
+    if (startPath === parentPath) {
+        throw Error('Could not find folder.');
+    }
+    // если папка этого путя совпадает с srcFolder
+    if (path_1.basename(startPath) === srcFolder) {
+        return startPath;
+    }
+    // если этот путь содержит srcFolder (для оптимизации можно написать еще проверку для parentPath в отдельном if)
+    if (fs.pathExistsSync(path_1.join(startPath, srcFolder))) {
+        return path_1.join(startPath, srcFolder);
+    }
+    return getSrcDir(srcFolder, parentPath);
+}
+exports.getSrcDir = getSrcDir;
+
 
 /***/ }),
 /* 11 */
