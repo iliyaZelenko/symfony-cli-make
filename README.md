@@ -36,4 +36,4 @@ node ./node_modules/symfony-cli-make
 
 Написан на TypeScript и Node.js.
 
-![](https://im.ezgif.com/tmp/ezgif-1-1cab9f5d8a1c.gif)
+![](https://i.imgur.com/2dBgmRN.gif)
