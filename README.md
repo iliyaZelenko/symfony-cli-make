@@ -5,7 +5,7 @@
 #### Установка
 
 ```bash
-yarn add symfony-cli-make
+yarn add --dev symfony-cli-make
 ```
 
 #### Использование
@@ -19,7 +19,7 @@ yarn twig-ext
 #### Установка
 
 ```bash
-npm i --save symfony-cli-make
+npm i --save-dev symfony-cli-make
 ```
 
 #### Использование:
