@@ -2,6 +2,8 @@
 
 ## yarn
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/iliyaZelenko/symfony-cli-make.svg)](https://greenkeeper.io/)
+
 #### Установка
 
 ```bash
